@@ -12,7 +12,7 @@ import asyncio
 from os import path as os_path
 from json import loads as json_loads
 
-async def func(filepath):
+async def stream_creator(filepath):
     if not os_path.isfile(filepath):
         return False
     
