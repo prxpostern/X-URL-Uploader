@@ -35,7 +35,8 @@ from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
 from PIL import Image
 from helper_funcs.help_Nekmo_ffmpeg import generate_screen_shots
-from plugins import thumbnail_video, ffprobe
+from plugins.ffprobe import stream_creator
+from plugins.thumbnail_video import thumb_creator
 
 
 async def youtube_dl_call_back(bot, update):
@@ -299,11 +300,11 @@ async def youtube_dl_call_back(bot, update):
                     )
                 )
             elif tg_send_type == "video":
-                probe = await ffprobe.func(download_directory)
+                probe = await stream_creator(download_directory)
                 video_stream = next((stream for stream in probe['streams'] if stream['codec_type'] == 'video'), None)
                 width = int(video_stream['width'] if 'width' in video_stream else 0)
                 height = int(video_stream['height'] if 'height' in video_stream else 0)
-                thumbnail = await thumbnail_video.func(download_directory)
+                thumbnail = await thumb_creator(download_directory)
                 await bot.send_video(
                     chat_id=update.message.chat.id,
                     video=download_directory,
