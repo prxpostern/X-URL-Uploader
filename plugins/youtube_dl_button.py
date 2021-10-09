@@ -300,6 +300,7 @@ async def youtube_dl_call_back(bot, update):
                 )
             elif tg_send_type == "video":
                 probe = await ffprobe.func(download_directory)
+                video_stream = next((stream for stream in probe['streams'] if stream['codec_type'] == 'video'), None)
                 thumbnail = await thumbnail_video.func(download_directory)
                 await bot.send_video(
                     chat_id=update.message.chat.id,
