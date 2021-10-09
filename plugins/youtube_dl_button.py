@@ -305,7 +305,7 @@ async def youtube_dl_call_back(bot, update):
                 #width = int(video_stream['width'] if 'width' in video_stream else 0)
                 #height = int(video_stream['height'] if 'height' in video_stream else 0)
                 #thumbnail = await thumb_creator(download_directory)
-                await bot.send_message(f"{probe}")
+                await bot.send_message(update, text=f"{probe}")
                 await bot.send_video(
                     chat_id=update.message.chat.id,
                     video=download_directory,
