@@ -10,7 +10,7 @@ LOGGER = logging.getLogger(__name__)
 
 from os import path as os_path, rename as os_rename, remove as os_remove
 import asyncio
-from bot.plugins import ffprobe
+from plugins import ffprobe
 
 async def func(filepath):
     if not os_path.exists(filepath):
